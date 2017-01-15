@@ -1,4 +1,4 @@
-package com.caij.lib;
+package com.caij.badge;
 
 import android.content.Context;
 import android.content.res.TypedArray;

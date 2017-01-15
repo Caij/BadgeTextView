@@ -12,24 +12,24 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.caij.badgetextview.MainActivity">
 
-    <com.caij.lib.BadgeTextView
+    <com.caij.badge.BadgeTextView
         style="@style/BadgeText"
         app:badge_color="@color/colorAccent"
         android:text="1"/>
 
-    <com.caij.lib.BadgeTextView
+    <com.caij.badge.BadgeTextView
         android:layout_marginTop="30dp"
         style="@style/BadgeText"
         app:badge_color="@color/colorAccent"
         android:text="100"/>
 
-    <com.caij.lib.BadgeTextView
+    <com.caij.badge.BadgeTextView
         style="@style/BadgeText"
         android:layout_marginTop="30dp"
         app:badge_color="@color/colorPrimary"
         android:text="99"/>
 
-    <com.caij.lib.BadgeTextView
+    <com.caij.badge.BadgeTextView
         style="@style/BadgeText"
         android:layout_marginTop="30dp"
         app:badge_color="@color/colorPrimary"

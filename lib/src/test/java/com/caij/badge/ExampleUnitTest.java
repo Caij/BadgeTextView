@@ -1,4 +1,4 @@
-package com.caij.lib;
+package com.caij.badge;
 
 import org.junit.Test;
 
