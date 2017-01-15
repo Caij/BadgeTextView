@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="BadgeTextView">
+        <attr name="badge_color" format="reference|color"/>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">lib</string>
+    <color name="default_badge_color">#ee2668</color>
+</resources>
