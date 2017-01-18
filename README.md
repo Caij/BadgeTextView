@@ -4,6 +4,22 @@
 
 ![image](image/device-2017-01-15-162552.png)
 
+Download
+--------
+Or use Gradle:
+
+```gradle
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
+dependencies {
+    compile 'com.github.Caij:BadgeTextView:v1.0.1'
+}
+```
+
 
 ###License
 Copyright (C) 2016 Caij
