@@ -16,7 +16,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.Caij:BadgeTextView:v1.0.1'
+    compile 'com.github.Caij:BadgeTextView:1.0.2'
 }
 ```
 
