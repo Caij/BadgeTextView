@@ -6,6 +6,10 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
+import android.graphics.drawable.shapes.RectShape;
+import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
@@ -20,8 +24,8 @@ import android.widget.TextView;
 
 public class BadgeTextView extends TextView {
 
-    private Paint mBadgePaint;
-    private RectF mBadgeRectF;
+    private int badgeColor;
+    private int preTextSize = 0;
 
     public BadgeTextView(Context context) {
         this(context, null);
@@ -46,76 +50,61 @@ public class BadgeTextView extends TextView {
     private void init(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         final TypedArray typedArray = getContext().obtainStyledAttributes(
                 attrs, R.styleable.BadgeTextView, defStyleAttr, defStyleRes);
-        int badgeColor = typedArray.getColor(R.styleable.BadgeTextView_badge_color,
+        badgeColor = typedArray.getColor(R.styleable.BadgeTextView_badge_color,
                 ContextCompat.getColor(getContext(), R.color.default_badge_color));
         typedArray.recycle();
-
-        mBadgePaint = new Paint();
-        mBadgePaint.setAntiAlias(true);
-        mBadgePaint.setStyle(Paint.Style.FILL);
-        // 设置mBadgeText居中，保证mBadgeText长度为1时，文本也能居中
-        mBadgePaint.setTextAlign(Paint.Align.CENTER);
-        mBadgePaint.setColor(badgeColor);
-
-        mBadgeRectF = new RectF();
 
         setGravity(Gravity.CENTER);
         setIncludeFontPadding(false);
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        int currentTextSize = getCSize(getText());
+        if (currentTextSize != this.preTextSize) {
+            refreshBackgroundDrawable();
+            this.preTextSize = currentTextSize;
+        }
+    }
 
-        int height = getMeasuredHeight();
-        int width = getMeasuredWidth();
+    private static int getCSize(CharSequence charSequence) {
+        if (charSequence == null) return 0;
+        return charSequence.length();
+    }
 
-        if (getText() == null || getText().length() <= 1) {
-            width = height;
+    private void refreshBackgroundDrawable() {
+        CharSequence text = getText();
+        if (text == null) {
+            return;
         }
 
-        super.onMeasure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY),
-                MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
+        RectShape rectShape;
+        if (text.length() == 1) {
+            rectShape = new Oval();
+        }else {
+            // 外部矩形弧度
+            int ra = getHeight() / 2;
+            float[] outerR = new float[] {ra, ra, ra, ra, ra, ra, ra, ra };
+            rectShape = new RoundRectShape(outerR, null, null);
+        }
+        ShapeDrawable shapeDrawable = new ShapeDrawable(rectShape);
+        shapeDrawable.getPaint().setColor(badgeColor);
+        setBackgroundDrawable(shapeDrawable);
     }
 
-    @Override
-    protected void onDraw(Canvas canvas) {
-        drawBadge(canvas);
-        super.onDraw(canvas);
+    private class Oval extends OvalShape {
+
+        public Oval() {
+            super();
+        }
+
+        @Override
+        public void draw(Canvas canvas, Paint paint) {
+            final int viewWidth = BadgeTextView.this.getWidth();
+            final int viewHeight = BadgeTextView.this.getHeight();
+            canvas.drawCircle(viewWidth / 2, viewHeight / 2, Math.min(viewWidth / 2, viewHeight / 2), paint);
+        }
     }
 
-    private void drawBadge(Canvas canvas) {
-        // 计算徽章背景的宽高
-        int badgeHeight = getHeight();
-
-        int badgeWidth = getWidth();
-
-        // 计算徽章背景上下的值
-        mBadgeRectF.top = 0;
-        mBadgeRectF.bottom = badgeHeight;
-
-        // 计算徽章背景左右的值
-        mBadgeRectF.left = 0;
-        mBadgeRectF.right = badgeWidth;
-
-        // 绘制徽章背景
-        canvas.drawRoundRect(mBadgeRectF, badgeHeight / 2f, badgeHeight / 2f, mBadgePaint);
-    }
-
-    public void setBadgeColor(int color) {
-        mBadgePaint.setColor(color);
-        invalidate();
-    }
-
-    @Override
-    @Deprecated
-    public void setBackgroundColor(int color) {
-        setBadgeColor(color);
-    }
-
-    @Override
-    @Deprecated
-    public void setBackgroundDrawable(Drawable background) {
-
-    }
 }
