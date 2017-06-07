@@ -4,15 +4,10 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.RectF;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.graphics.drawable.shapes.RectShape;
 import android.graphics.drawable.shapes.RoundRectShape;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.TextView;
@@ -41,17 +36,11 @@ public class BadgeTextView extends TextView {
         init(attrs, defStyleAttr, 0);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public BadgeTextView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init(attrs, defStyleAttr, defStyleRes);
-    }
-
     private void init(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         final TypedArray typedArray = getContext().obtainStyledAttributes(
                 attrs, R.styleable.BadgeTextView, defStyleAttr, defStyleRes);
         badgeColor = typedArray.getColor(R.styleable.BadgeTextView_badge_color,
-                ContextCompat.getColor(getContext(), R.color.default_badge_color));
+                getResources().getColor(R.color.default_badge_color));
         typedArray.recycle();
 
         setGravity(Gravity.CENTER);
