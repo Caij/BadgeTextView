@@ -57,6 +57,13 @@ public class BadgeTextView extends TextView {
         }
     }
 
+    public void setBadgeColor(int colorInt) {
+        if (badgeColor != colorInt) {
+            this.badgeColor = colorInt;
+            refreshBackgroundDrawable();
+        }
+    }
+
     private static int getCSize(CharSequence charSequence) {
         if (charSequence == null) return 0;
         return charSequence.length();
