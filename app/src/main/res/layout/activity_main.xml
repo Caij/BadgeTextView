@@ -21,6 +21,25 @@
         android:layout_marginTop="30dp"
         style="@style/BadgeText"
         app:badge_color="@color/colorAccent"
+        android:text="9"/>
+
+    <com.caij.badge.BadgeTextView
+        android:layout_marginTop="30dp"
+        style="@style/BadgeText"
+        app:badge_color="@color/colorAccent"
+        android:text="19"/>
+
+    <com.caij.badge.BadgeTextView
+        android:layout_marginTop="30dp"
+        style="@style/BadgeText"
+        app:badge_color="@color/colorAccent"
+        android:text="99"/>
+
+
+    <com.caij.badge.BadgeTextView
+        android:layout_marginTop="30dp"
+        style="@style/BadgeText"
+        app:badge_color="@color/colorAccent"
         android:text="100"/>
 
     <com.caij.badge.BadgeTextView
