@@ -21,6 +21,13 @@
         android:layout_marginTop="30dp"
         style="@style/BadgeText"
         app:badge_color="@color/colorAccent"
+        android:text="2"/>
+
+
+    <com.caij.badge.BadgeTextView
+        android:layout_marginTop="30dp"
+        style="@style/BadgeText"
+        app:badge_color="@color/colorAccent"
         android:text="9"/>
 
     <com.caij.badge.BadgeTextView
