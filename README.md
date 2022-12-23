@@ -9,14 +9,8 @@ Download
 Or use Gradle:
 
 ```gradle
-repositories {
-    maven {
-        url "https://jitpack.io"
-    }
-}
-
 dependencies {
-    compile 'com.github.Caij:BadgeTextView:1.2.0'
+    compile 'io.github.caij:BadgeTextView:1.3.0'
 }
 ```
 
